@@ -1,5 +1,12 @@
 This is a hack base for Age of Empires II (2013)
 
+Features:
+- Display each players ressources (Food, Wood, Gold, Stone, Population)
+- Display amount of infantry and cavarly each player has
+- Easy to extend
+
+
+
 Want to contribute but don't know what do do? Here are some tasks:
 
 Easy
