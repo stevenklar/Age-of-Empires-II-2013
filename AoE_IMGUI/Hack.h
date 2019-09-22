@@ -58,9 +58,13 @@ bool openOverlay = true;
 void RunHack()
 {
 	static Main* main = reinterpret_cast<Main*>((DWORD)GetModuleHandle(NULL) + 0x6FDA30);
-	static int totalPlayers = *reinterpret_cast<int*>((DWORD)GetModuleHandle(NULL) + 0x9D9FFC);
-	static GameData* gameData = main->GameData;
-	static PlayerArray* playerArray = gameData->pPlayerArray;
+	int totalPlayers = *reinterpret_cast<int*>((DWORD)GetModuleHandle(NULL) + 0x9D9FFC);
+	GameData* gameData = main->GameData;
+	
+	if (gameData == NULL || gameData->pPlayerArray == NULL)
+		return;
+	
+	PlayerArray* playerArray = gameData->pPlayerArray;
 
 	if (GetAsyncKeyState(VK_INSERT) & 1) { openOverlay = !openOverlay; }
 
