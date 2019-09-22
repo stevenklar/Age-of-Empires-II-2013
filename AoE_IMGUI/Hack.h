@@ -16,7 +16,7 @@ void createPlayerTreeNode(Player* player)
 		ImGui::Text("Food: %.f", player->Ressources->food);
 		ImGui::Text("Gold: %.f", player->Ressources->gold);
 		ImGui::Text("Stone: %.f", player->Ressources->stone);
-		ImGui::Text("Villigers: %.f", player->Ressources->villagerCount);
+		ImGui::Text("Villagers: %.f", player->Ressources->villagerCount);
 		ImGui::Text("Pop: %.f/%.f", player->Ressources->CurrentPop, player->Ressources->CurrentPop + player->Ressources->popSpaceLeft);
 
 		if (ImGui::TreeNode("Units"))
