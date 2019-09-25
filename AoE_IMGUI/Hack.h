@@ -6,12 +6,40 @@
 #include "../ImGui/imgui_impl_dx9.h"
 #include "../ImGui/imgui_impl_win32.h"
 
+#include "../ImGui/imgui_internal.h"
+
 #include "Classes.h"
+
+
+void RenderCircle(const ImVec2& position, float radius, uint32_t color, float thickness, uint32_t segments)
+{
+	ImGuiWindow* window = ImGui::GetCurrentWindow();
+
+	float a = (color >> 24) & 0xff;
+	float r = (color >> 16) & 0xff;
+	float g = (color >> 8) & 0xff;
+	float b = (color) & 0xff;
+
+	window->DrawList->AddCircle(position, radius, ImGui::GetColorU32({ r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f }), segments, thickness);
+}
+
+void RenderLine(const ImVec2& from, const ImVec2& to, uint32_t color, float thickness)
+{
+	ImGuiWindow* window = ImGui::GetCurrentWindow();
+
+	float a = (color >> 24) & 0xff;
+	float r = (color >> 16) & 0xff;
+	float g = (color >> 8) & 0xff;
+	float b = (color) & 0xff;
+
+	window->DrawList->AddLine(from, to, ImGui::GetColorU32({ r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f }), thickness);
+}
 
 void createPlayerTreeNode(Player* player)
 {
 	if (ImGui::TreeNode((char*)player->pName))
 	{
+		ImGui::Text("Player: %x", player);
 		ImGui::Text("Wood: %.f", player->Ressources->wood);
 		ImGui::Text("Food: %.f", player->Ressources->food);
 		ImGui::Text("Gold: %.f", player->Ressources->gold);
@@ -31,6 +59,38 @@ void createPlayerTreeNode(Player* player)
 
 				if (unit->pOwner == player)
 				{
+					static BaseGameScreen* baseGameSreen = reinterpret_cast<BaseGameScreen*>((DWORD)GetModuleHandle(NULL) + 0x6F3D90);
+	
+					float screenX = (unit->vPos.x - unit->vPos.z) * 96;
+					float screenZ = (unit->vPos.x + unit->vPos.z) * 96;
+
+					float tile_width = 96;
+					float tile_height = 96;
+
+					Vector3 screenViewPos = baseGameSreen->gameScreenPtr->mainViewPtr->PosScreen;
+
+					float screenX2 = (unit->vPos.x- screenViewPos.x) * (tile_width / 2) + (unit->vPos.z - screenViewPos.x) * (tile_width / 2);
+					float screenY2 = (unit->vPos.z - screenViewPos.y) * (tile_height / 2) - (unit->vPos.x - screenViewPos.x / 2) * (tile_height / 2);
+
+					float GlobalX = screenViewPos.x + (unit->vPos.x - unit->vPos.z) * 2;
+					float GlobalY = screenViewPos.y + (unit->vPos.x + unit->vPos.z) * 1;
+
+					ImGui::Text("");
+					ImGui::Text("%s", unit->pUnitData->name);
+					ImGui::Text("x: %f y: %f z: %f", unit->vPos.x, unit->vPos.y, unit->vPos.z);
+					ImGui::Text("sX: %f sY: %f", screenX2, screenY2);
+
+					float xDelta = unit->vPos.x - screenViewPos.x;
+					float yDelta = unit->vPos.z - screenViewPos.y;
+
+
+					float screenXfinal = ((xDelta + yDelta) / 2)*tile_width + 1280;
+					float screenYfinal = (((xDelta - yDelta) / 2)* tile_height * -1) / 2 + 720;
+					ImGui::Text("gridX: %f gridY: %f", screenXfinal, screenYfinal);
+					RenderCircle(ImVec2(screenXfinal, screenYfinal), 20, 0xffffffff, 2, 10);
+		
+					//ImGui::Text("sX: %f sY: %f", screenX, screenZ);
+					//ImGui::Text("ScreenPosition x: %f y: %f z: %f", screenX2, screenY2);
 					if (unit->pUnitData->Class == EnumUnitDataClass::Building)
 					{
 						buildingCount++;
@@ -54,11 +114,13 @@ void createPlayerTreeNode(Player* player)
 	}
 }
 
+int tileSize = 1;
 bool openOverlay = true;
 void RunHack()
 {
 	static Main* main = reinterpret_cast<Main*>((DWORD)GetModuleHandle(NULL) + 0x6FDA30);
 	static int totalPlayers = *reinterpret_cast<int*>((DWORD)GetModuleHandle(NULL) + 0x9D9FFC);
+	
 	static GameData* gameData = main->GameData;
 	static PlayerArray* playerArray = gameData->pPlayerArray;
 
@@ -67,9 +129,13 @@ void RunHack()
 	ImGui::SetNextWindowBgAlpha(0.35f);
 	if (openOverlay)
 	{
-		if (ImGui::Begin("Age of Empires 2 HD", &openOverlay, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav))
+		if (ImGui::Begin("Age of Empires 2 HD", &openOverlay, ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav))
 		{
-			for (int i = 1; i < totalPlayers; i++)
+			static BaseGameScreen* baseGameSreen = reinterpret_cast<BaseGameScreen*>((DWORD)GetModuleHandle(NULL) + 0x6F3D90);
+			Vector3 screenViewPos = baseGameSreen->gameScreenPtr->mainViewPtr->PosScreen;
+			ImGui::Text("ScreenView x: %f y: %f z: %f", screenViewPos.x, screenViewPos.y);
+			ImGui::SliderInt("TileSize", &tileSize, 1, 128);
+			for (int i = 0; i < totalPlayers; i++)
 			{
 				createPlayerTreeNode(playerArray->playerData[i].player);
 			}
