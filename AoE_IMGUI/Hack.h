@@ -145,6 +145,7 @@ void createPlayerTreeNode(Player* player)
 
 					float screenXfinal = ((xDelta + yDelta) / 2)*tile_width + 1280;
 					float screenYfinal = (((xDelta - yDelta) / 2)* tile_height * -1) / 2 + 720;
+					screenYfinal -= unit->vPos.y * 96 / 4;
 					ImGui::Text("gridX: %f gridY: %f", screenXfinal, screenYfinal);
 					//RenderCircle(ImVec2(screenXfinal, screenYfinal), 20, 0xffffffff, 2, 10);
 					RenderCircle(ImVec2(screenXfinal- tile_width/2, screenYfinal - tile_height), 20, 0xffffffff, 2, 10);
