@@ -21,7 +21,7 @@ void createPlayerTreeNode(Player* player)
 		ImGui::Text("Food: %.f", player->Ressources->food);
 		ImGui::Text("Gold: %.f", player->Ressources->gold);
 		ImGui::Text("Stone: %.f", player->Ressources->stone);
-		ImGui::Text("Villigers: %.f", player->Ressources->villagerCount);
+		ImGui::Text("Villagers: %.f", player->Ressources->villagerCount);
 		ImGui::Text("Pop: %.f/%.f", player->Ressources->CurrentPop, player->Ressources->CurrentPop + player->Ressources->popSpaceLeft);
 
 		if (ImGui::TreeNode("Units"))
@@ -100,6 +100,7 @@ void RunHack()
 	
 	static GameData* gameData = main->GameData;
 	static PlayerArray* playerArray = gameData->pPlayerArray;
+
 
 	static bool openOverlay = true;
 	if (GetAsyncKeyState(VK_INSERT) & 1) { openOverlay = !openOverlay; }
