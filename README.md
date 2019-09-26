@@ -4,6 +4,7 @@ Features:
 - Display each players ressources (Food, Wood, Gold, Stone, Population)
 - Display amount of infantry and cavarly each player has
 - Maphack (desync on multiplayer)
+- ESP
 - Easy to extend
 
 
