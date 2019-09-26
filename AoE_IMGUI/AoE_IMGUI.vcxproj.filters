@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="..\ImGui\imgui.cpp">
       <Filter>Source Files\imgui</Filter>
     </ClCompile>
@@ -22,6 +21,10 @@
     </ClCompile>
     <ClCompile Include="DetourHook.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dllmain.cpp" />
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -52,14 +55,23 @@
     <ClInclude Include="Patternscaning.h">
       <Filter>Header Files\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="Classes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Hack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DetourHook.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Offsets.h">
+      <Filter>Header Files\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="Sdk.h">
+      <Filter>Header Files\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes.h">
+      <Filter>Header Files\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Header Files\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -74,6 +86,15 @@
     </Filter>
     <Filter Include="Source Files\imgui">
       <UniqueIdentifier>{e29cd3c3-0059-42b3-9119-586b7bae21fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SDK">
+      <UniqueIdentifier>{e4549112-2aa9-4633-891d-fecc398d8590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Renderer">
+      <UniqueIdentifier>{7f041d20-9a57-402b-b851-01df015f76bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer">
+      <UniqueIdentifier>{485c1dc3-89e3-4ecc-968c-7eda9ec6e6b7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

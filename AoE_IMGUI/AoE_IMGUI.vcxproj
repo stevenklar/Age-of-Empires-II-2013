@@ -164,7 +164,7 @@
     <ClCompile Include="..\ImGui\imgui_impl_win32.cpp" />
     <ClCompile Include="..\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="DetourHook.cpp" />
-    <ClCompile Include="dllmain.cpp">
+    <ClCompile Include="Dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </PrecompiledHeader>
@@ -178,6 +178,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ImGui\imconfig.h" />
@@ -191,7 +192,10 @@
     <ClInclude Include="Classes.h" />
     <ClInclude Include="DetourHook.h" />
     <ClInclude Include="Hack.h" />
+    <ClInclude Include="Offsets.h" />
     <ClInclude Include="Patternscaning.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Sdk.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
