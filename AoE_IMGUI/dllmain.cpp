@@ -11,7 +11,6 @@
 #include "../ImGui/imgui_impl_win32.h"
 
 #include "DetourHook.h"
-#include "Classes.h"
 #include "Hack.h"
 
 
@@ -92,7 +91,7 @@ VOID WINAPI OnDllDetach()
 }
 
 
-DWORD WINAPI MainThread(LPVOID param) // Our main thread
+DWORD WINAPI MainThread(LPVOID param)
 {
 	OnDllAttach(param);
 	HWND  window = FindWindowA(NULL, windowName);
@@ -100,6 +99,7 @@ DWORD WINAPI MainThread(LPVOID param) // Our main thread
 	oWndProc = (WNDPROC)SetWindowLongPtr(window, GWLP_WNDPROC, (LONG_PTR)WndProc);
 
 	
+	//Create a D3D9Device so we can hook its VFTABLE
 	IDirect3D9 * pD3D = Direct3DCreate9(D3D_SDK_VERSION);
 
 	if (!pD3D)
@@ -128,10 +128,9 @@ DWORD WINAPI MainThread(LPVOID param) // Our main thread
 		Sleep(1);
 	}
 
+	//Restore hooks and end thread
 	(WNDPROC)SetWindowLongPtr(window, GWLP_WNDPROC, (LONG_PTR)oWndProc);
 	endsceneHook.Unhook();
-
-
 	FreeLibraryAndExitThread((HMODULE)param, 0);
 	return false; 
 }
@@ -150,4 +149,3 @@ BOOL APIENTRY DllMain(HMODULE hModule,DWORD  ul_reason_for_call,LPVOID lpReserve
 	}
 	return TRUE;
 }
-
