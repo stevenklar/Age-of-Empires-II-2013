@@ -1,6 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include <iostream>
+#include <sstream>
 
 #include "../ImGui/imgui.h"
 #include "../ImGui/imgui_impl_dx9.h"
@@ -10,6 +11,64 @@
 
 #include "Classes.h"
 
+
+
+//
+//float RenderText(const std::string& text, const ImVec2& position, float size, uint32_t color, bool center)
+//{
+//	static ImFont* m_pFont;
+//	static void* g_fFont;
+//
+//	if (!m_pFont)
+//	{
+//		ImGuiIO& io = ImGui::GetIO();
+//
+//		io.Fonts->AddFontFromMemoryTTF(g_fFont, sizeof(g_fFont), 14.0f, nullptr, io.Fonts->GetGlyphRangesCyrillic());
+//		m_pFont = io.Fonts->AddFontFromMemoryTTF(g_fFont, sizeof(g_fFont), 32.0f, nullptr, io.Fonts->GetGlyphRangesCyrillic());
+//	}
+//	ImGuiWindow* window = ImGui::GetCurrentWindow();
+//
+//	float a = (color >> 24) & 0xff;
+//	float r = (color >> 16) & 0xff;
+//	float g = (color >> 8) & 0xff;
+//	float b = (color) & 0xff;
+//
+//	std::stringstream stream(text);
+//	std::string line;
+//
+//	float y = 0.0f;
+//	int i = 0;
+//
+//	while (std::getline(stream, line))
+//	{
+//		ImVec2 textSize = m_pFont->CalcTextSizeA(size, FLT_MAX, 0.0f, line.c_str());
+//
+//		if (center)
+//		{
+//			window->DrawList->AddText(m_pFont, size, { (position.x - textSize.x / 2.0f) + 1.0f, (position.y + textSize.y * i) + 1.0f }, ImGui::GetColorU32({ 0.0f, 0.0f, 0.0f, a / 255.0f }), line.c_str());
+//			window->DrawList->AddText(m_pFont, size, { (position.x - textSize.x / 2.0f) - 1.0f, (position.y + textSize.y * i) - 1.0f }, ImGui::GetColorU32({ 0.0f, 0.0f, 0.0f, a / 255.0f }), line.c_str());
+//			window->DrawList->AddText(m_pFont, size, { (position.x - textSize.x / 2.0f) + 1.0f, (position.y + textSize.y * i) - 1.0f }, ImGui::GetColorU32({ 0.0f, 0.0f, 0.0f, a / 255.0f }), line.c_str());
+//			window->DrawList->AddText(m_pFont, size, { (position.x - textSize.x / 2.0f) - 1.0f, (position.y + textSize.y * i) + 1.0f }, ImGui::GetColorU32({ 0.0f, 0.0f, 0.0f, a / 255.0f }), line.c_str());
+//
+//			window->DrawList->AddText(m_pFont, size, { position.x - textSize.x / 2.0f, position.y + textSize.y * i }, ImGui::GetColorU32({ r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f }), line.c_str());
+//		}
+//		else
+//		{
+//			window->DrawList->AddText(m_pFont, size, { (position.x) + 1.0f, (position.y + textSize.y * i) + 1.0f }, ImGui::GetColorU32({ 0.0f, 0.0f, 0.0f, a / 255.0f }), line.c_str());
+//			window->DrawList->AddText(m_pFont, size, { (position.x) - 1.0f, (position.y + textSize.y * i) - 1.0f }, ImGui::GetColorU32({ 0.0f, 0.0f, 0.0f, a / 255.0f }), line.c_str());
+//			window->DrawList->AddText(m_pFont, size, { (position.x) + 1.0f, (position.y + textSize.y * i) - 1.0f }, ImGui::GetColorU32({ 0.0f, 0.0f, 0.0f, a / 255.0f }), line.c_str());
+//			window->DrawList->AddText(m_pFont, size, { (position.x) - 1.0f, (position.y + textSize.y * i) + 1.0f }, ImGui::GetColorU32({ 0.0f, 0.0f, 0.0f, a / 255.0f }), line.c_str());
+//
+//			window->DrawList->AddText(m_pFont, size, { position.x, position.y + textSize.y * i }, ImGui::GetColorU32({ r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f }), line.c_str());
+//		}
+//
+//		y = position.y + textSize.y * (i + 1);
+//		i++;
+//	}
+//
+//	return y;
+//}
+//
 
 void RenderCircle(const ImVec2& position, float radius, uint32_t color, float thickness, uint32_t segments)
 {
@@ -87,7 +146,8 @@ void createPlayerTreeNode(Player* player)
 					float screenXfinal = ((xDelta + yDelta) / 2)*tile_width + 1280;
 					float screenYfinal = (((xDelta - yDelta) / 2)* tile_height * -1) / 2 + 720;
 					ImGui::Text("gridX: %f gridY: %f", screenXfinal, screenYfinal);
-					RenderCircle(ImVec2(screenXfinal, screenYfinal), 20, 0xffffffff, 2, 10);
+					//RenderCircle(ImVec2(screenXfinal, screenYfinal), 20, 0xffffffff, 2, 10);
+					RenderCircle(ImVec2(screenXfinal- tile_width/2, screenYfinal - tile_height), 20, 0xffffffff, 2, 10);
 		
 					//ImGui::Text("sX: %f sY: %f", screenX, screenZ);
 					//ImGui::Text("ScreenPosition x: %f y: %f z: %f", screenX2, screenY2);
