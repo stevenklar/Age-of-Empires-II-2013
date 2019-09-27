@@ -3,6 +3,7 @@ This is a hack base for Age of Empires II (2013)
 Features:
 - Display each players ressources (Food, Wood, Gold, Stone, Population)
 - Display amount of infantry and cavarly each player has
+- Display your villagers
 - Maphack (desync on multiplayer)
 - ESP
 - Easy to extend
