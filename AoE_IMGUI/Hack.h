@@ -117,6 +117,18 @@ void RunHack()
 				
 				createPlayerTreeNode(playerArray->playerData[i].player);
 			}
+			if (ImGui::TreeNode("Civilian Count"))
+			{
+				std::vector<Unit*> idle = getIdleCivilianList(playerArray->playerData[0].player);
+				Ressources res = getCivilianDistribution(playerArray->playerData[0].player);
+
+				ImGui::Text("Idle:  %i", idle.size());
+				ImGui::Text("Wood:  %i", static_cast<int>(res.wood));
+				ImGui::Text("Food:  %i", static_cast<int>(res.food));
+				ImGui::Text("Gold:  %i", static_cast<int>(res.gold));
+				ImGui::Text("Stone: %i", static_cast<int>(res.stone));
+				ImGui::TreePop();
+			}
 			if (ImGui::Button("Maphack"))
 			{
 				typedef int(__cdecl *tEnableCheats)();
