@@ -79,6 +79,9 @@ void Renderer::RenderLine(const ImVec2& from, const ImVec2& to, uint32_t color, 
 	window->DrawList->AddLine(from, to, ImGui::GetColorU32({ r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f }), thickness);
 }
 
+
+
+
 void Renderer::RenderCircle(const ImVec2& position, float radius, uint32_t color, float thickness, uint32_t segments)
 {
 	ImGuiWindow* window = ImGui::GetCurrentWindow();
@@ -113,6 +116,21 @@ void Renderer::RenderRect(const ImVec2& from, const ImVec2& to, uint32_t color, 
 	float b = (color) & 0xFF;
 
 	window->DrawList->AddRect(from, to, ImGui::GetColorU32({ r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f }), rounding, roundingCornersFlags, thickness);
+}
+
+void Renderer::RenderRect(const ImVec2& one, const ImVec2& two, const ImVec2& three, const ImVec2& four, uint32_t color, float thickness)
+{
+	ImGuiWindow* window = ImGui::GetCurrentWindow();
+
+	float a = (color >> 24) & 0xFF;
+	float r = (color >> 16) & 0xFF;
+	float g = (color >> 8) & 0xFF;
+	float b = (color) & 0xFF;
+
+	window->DrawList->AddLine(one, two, ImGui::GetColorU32({ r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f }), thickness);
+	window->DrawList->AddLine(two, three, ImGui::GetColorU32({ r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f }), thickness);
+	window->DrawList->AddLine(three, four, ImGui::GetColorU32({ r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f }), thickness);
+	window->DrawList->AddLine(four, one, ImGui::GetColorU32({ r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f }), thickness);
 }
 
 void Renderer::RenderRectFilled(const ImVec2& from, const ImVec2& to, uint32_t color, float rounding, uint32_t roundingCornersFlags)
