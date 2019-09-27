@@ -144,3 +144,14 @@ void Renderer::RenderRectFilled(const ImVec2& from, const ImVec2& to, uint32_t c
 
 	window->DrawList->AddRectFilled(from, to, ImGui::GetColorU32({ r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f }), rounding, roundingCornersFlags);
 }
+
+
+void Renderer::DrawUnitCollisionRectangle(ImVec2 screenPositionCenter, ImVec2 collision, uint32_t color)
+{
+	ImVec2 ivOne = ImVec2(screenPositionCenter.x - collision.x, screenPositionCenter.y - collision.y);
+	ImVec2 ivTwo = ImVec2(screenPositionCenter.x + collision.x, screenPositionCenter.y - collision.y);
+	ImVec2 ivThree = ImVec2(screenPositionCenter.x + collision.x, screenPositionCenter.y + collision.y);
+	ImVec2 ivFour = ImVec2(screenPositionCenter.x + collision.x, screenPositionCenter.y - collision.y);
+
+	Renderer::Get()->RenderRect(ivOne, ivTwo, ivThree, ivFour, color);
+}

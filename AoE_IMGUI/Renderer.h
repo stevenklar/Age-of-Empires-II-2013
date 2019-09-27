@@ -3,6 +3,7 @@
 
 #include "../ImGui/imgui.h"
 
+class Unit;
 class Renderer 
 {
 	private:
@@ -24,4 +25,6 @@ class Renderer
 		void RenderRect(const ImVec2& from, const ImVec2& to, uint32_t color, float rounding = 0.0f, uint32_t roundingCornersFlags = ImDrawCornerFlags_All, float thickness = 1.0f);
 		void RenderRect(const ImVec2& one, const ImVec2& two, const ImVec2& three, const ImVec2& four, uint32_t color, float thickness = 1.0f);
 		void RenderRectFilled(const ImVec2& from, const ImVec2& to, uint32_t color, float rounding = 0.0f, uint32_t roundingCornersFlags = ImDrawCornerFlags_All);
+
+		void DrawUnitCollisionRectangle(ImVec2 screenPositionCenter, ImVec2 collision, uint32_t color);
 };
