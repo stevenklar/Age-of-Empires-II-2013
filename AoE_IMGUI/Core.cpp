@@ -105,11 +105,6 @@ void Core::OnEndscene()
 	}
 	Renderer::Get()->EndScene();
 
-
-	static bool openOverlay = true;
-	if (GetAsyncKeyState(VK_INSERT) & 1) { openOverlay = !openOverlay; }
-
-
 	ImGui::SetNextWindowBgAlpha(0.35f);
 	if (openOverlay)
 	{
