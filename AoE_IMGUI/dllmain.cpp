@@ -12,6 +12,7 @@
 
 #include "DetourHook.h"
 #include "Core.h"
+#include "FeatureManager.h"
 
 
 const char* windowName = "Age of Empires II: HD Edition"; 
@@ -130,6 +131,7 @@ DWORD WINAPI MainThread(LPVOID param)
 		Sleep(1);
 	}
 
+	FeatureManager::Get()->OnShutdown();
 	//Restore hooks and end thread
 	(WNDPROC)SetWindowLongPtr(window, GWLP_WNDPROC, (LONG_PTR)oWndProc);
 	endsceneHook.Unhook();

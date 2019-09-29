@@ -24,6 +24,8 @@ Core::Core()
 	FeatureManager::Get()->registerFeature(new UnitCollisions());
 	FeatureManager::Get()->registerFeature(new Maphack());
 	FeatureManager::Get()->registerFeature(new RessourceInformation());
+
+	FeatureManager::Get()->OnInitialise();
 }
 
 void createPlayerTreeNode(Player* player)
