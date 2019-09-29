@@ -37,5 +37,13 @@ void DrawBox(Unit* unit)
 
 void UnitCollisions::OnUnitIteration(Unit* unit)
 {
-	DrawBox(unit);
+	if (enabled)
+	{
+		DrawBox(unit);
+	}
+}
+
+void UnitCollisions::OnMenuMainWindow()
+{
+	ImGui::Checkbox("ESP", &enabled);
 }
