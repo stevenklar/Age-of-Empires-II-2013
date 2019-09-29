@@ -1,10 +1,5 @@
 #include "Feature.h"
 
-std::vector <Player*> Feature::players;
-std::vector <Unit*> Feature::units;
-
-
-
 void Feature::OnInitialise()
 {
 

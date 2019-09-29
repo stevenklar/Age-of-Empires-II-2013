@@ -8,8 +8,6 @@ class Feature
 	
 protected:
 	bool enabled = true;
-	static std::vector <Player*> players;
-	static std::vector <Unit*> units;
 public:
 	virtual void OnInitialise();
 	virtual void OnShutdown();
